@@ -2,7 +2,12 @@
 
 Client para a API 3.0 da Cielo em Node.Js
 
+[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/)
 [![Build Status](https://travis-ci.org/banzeh/cielo.svg?branch=master)](https://travis-ci.org/banzeh/cielo)
+[![Known Vulnerabilities](https://snyk.io/test/github/banzeh/cielo/badge.svg?style=flat-square)](https://snyk.io/test/github/banzeh/cielo)
+[![codebeat badge](https://codebeat.co/badges/2dc50ca6-f248-4f32-a2c9-4a71785fd8f8)](https://codebeat.co/projects/github-com-banzeh-cielo-master)
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![Open Source Love svg2](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
 
 ## Índice
 
@@ -31,6 +36,11 @@ Client para a API 3.0 da Cielo em Node.Js
 
 #### [Cartões](#cartoes)
 + [Gerando o token de um cartão](#cartoesToken)
+
+#### [Consultas](#consulta)
++ [Consultando as transações usando PaymentID](#consultaPaymentId)
++ [Consultando as transações usando MerchandOrderID](#consultaMerchandOrderID)
+
 
 #### [API Reference](#apiReference)
 #### [Autor](#autor)
@@ -390,6 +400,62 @@ Ou usando Async / Await
 
 ```js
 const token = await cielo.cards.createTokenizedCard(dados)
+console.log('token', token);
+```
+
+## <a name="consulta"></a> Consultas
+
+### <a name="consultaPaymentId"></a> Consulta Transação usando PaymentId
+
+```js
+const dadosConsulta = {
+    "paymentId": "24bc8366-fc31-4d6c-8555-17049a836a07"
+};
+
+cielo.consulting.sale(dadosConsulta)
+    .then((data) => {
+        console.log(data)
+    })
+    .catch((err) => {
+        console.log(err);
+    })
+```
+
+Ou usando Async / Await
+
+```js
+const dadosConsulta = {
+    "paymentId": "24bc8366-fc31-4d6c-8555-17049a836a07"
+};
+
+const token = await cielo.consulting.sale(dados)
+console.log('token', token);
+```
+
+### <a name="consultaMerchandOrderID"></a> Consultando as transações usando MerchandOrderID
+
+```js
+const dadosConsulta = {
+    "merchantOrderId": "2014111706"
+};
+
+cielo.consulting.sale(dadosConsulta)
+    .then((data) => {
+        console.log(data)
+    })
+    .catch((err) => {
+        console.log(err);
+    })
+```
+
+Ou usando Async / Await
+
+```js
+const dadosConsulta = {
+    "merchantOrderId": "2014111706"
+};
+
+const token = await cielo.consulting.sale(dados)
 console.log('token', token);
 ```
 
